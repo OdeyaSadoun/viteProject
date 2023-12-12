@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,23 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+
+/* for global css */
+
+header .nav ul{
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin:0;
+}
+
+header .nav ul li{
+  padding:0 8px ;
+}
+
+header .nav ul li a{
+  color:white;
+  text-decoration: none;
 }
