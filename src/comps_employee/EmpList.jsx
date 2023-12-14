@@ -3,11 +3,11 @@ import { AppContext } from '../context/context'
 import EmpItem from './EmpItem';
 
 const EmpList = () => {
-    const {ar_emps, setAr_emps} = useContext(AppContext);
+    const {ar_emps, setAr_emps, gender, setGender} = useContext(AppContext);
   return (
     <div className='container d-flex flex-wrap'>
         {ar_emps.map(item => {
-            return <EmpItem key={item.id} item={item}/>
+            return <EmpItem key={item.email} item={item} />
         })}
     </div>
   )
