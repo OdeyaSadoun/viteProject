@@ -1,8 +1,13 @@
 import React from 'react'
 
-const EmpItem = () => {
+const EmpItem = (props) => {
+    let item = props.item;
+    console.log(item);
   return (
-    <div>EmpItem</div>
+    <div>
+        <p>{item.name.first}</p>
+        <img src={item.picture.large}/>
+    </div>
   )
 }
 

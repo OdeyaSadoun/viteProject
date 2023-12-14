@@ -8,7 +8,6 @@ import Home from './comps/Home'
 import AppEmp from './comps_employee/AppEmp'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <BrowserRouter>
