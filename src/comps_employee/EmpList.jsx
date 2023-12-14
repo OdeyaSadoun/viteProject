@@ -5,7 +5,7 @@ import EmpItem from './EmpItem';
 const EmpList = () => {
     const {ar_emps, setAr_emps} = useContext(AppContext);
   return (
-    <div>
+    <div className='container d-flex flex-wrap'>
         {ar_emps.map(item => {
             return <EmpItem key={item.id} item={item}/>
         })}

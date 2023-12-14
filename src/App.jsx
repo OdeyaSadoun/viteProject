@@ -15,6 +15,7 @@ function App() {
       <Routes>
         <Route index element={<Home/>}/>
         <Route path="/employee" element={<AppEmp/>}/>
+        <Route path="/employee/:nat" element={<AppEmp/>}/>
         <Route path="*" element={<h2>404, Page not found!</h2>}/>
       </Routes>
     </BrowserRouter>
