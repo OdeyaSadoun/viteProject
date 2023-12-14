@@ -27,7 +27,7 @@ const AppEmp = () => {
 
     return (
         <AppContext.Provider value={{ ar_emps, setAr_emps, nat, setNat, gender, setGender }}>
-            <div className='container'>
+            <div className='container mx-auto'>
                 <EmpInput />
                 <EmpList />
             </div>

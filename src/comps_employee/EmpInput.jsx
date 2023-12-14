@@ -11,15 +11,15 @@ const EmpInput = () => {
     const {gender, setGender} = useContext(AppContext);
 
     return (
-        <div className='container d-flex justify-context-between'>
-            <div className='left'>
-            <input className='m-2' ref={inputRef} type="search" placeholder='put in nation' />
-            <button onClick={() => {
+        <div className='container d-flex justify-content-between p-3 m-4 mx-auto'>
+            <div>
+            <input ref={inputRef} type="search" placeholder='put in nation' />
+            <button  onClick={() => {
               nav(`/employee/${inputRef.current.value}`)  
-            }} className='btn btn-info'>search</button>
+            }} className='btn btn-info mx-1'>search</button>
             </div>
-            <div className='right'>
-                <select ref={inputRefSearch} onChange={() => {
+            <div >
+                <select className='form-control' ref={inputRefSearch} onChange={() => {
                     setGender(inputRefSearch.current.value)
                 }}>
                     <option>choose gender</option>
