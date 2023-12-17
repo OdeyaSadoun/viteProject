@@ -18,6 +18,8 @@ import counter from './redux_comps/counter'
 import Counter from './redux_comps/counter'
 import AppTodo from './todos_redux_comps/appTodo'
 
+import AppResume from './resume/AppResume'
+
 
 function App() {
 
@@ -39,7 +41,8 @@ function App() {
         <Route path="/employee:company" element={<AppEmp/>}/>
         <Route path="/form" element={<Form/>}/>
         <Route path="/counter" element={<Counter/>}/>
-        <Route path="/todos" element={<AppTodo/>}/>
+        <Route path="/todos" element={<AppTodo/>}/> 
+        <Route path="/resume" element={<AppResume/>}/> 
         <Route path="*" element={<h2>Page 404, not found!</h2>}/>
       </Routes>
       </Provider>
