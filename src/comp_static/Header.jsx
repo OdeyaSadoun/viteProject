@@ -26,6 +26,9 @@ const Header = () => {
                         <li>
                             <Link to="/counter">Counter</Link>
                         </li>
+                        <li>
+                            <Link to="/todos">Todo</Link>
+                        </li>
                     </ul>
 
                 </nav>

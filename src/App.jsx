@@ -9,19 +9,22 @@ import About from './comps/About'
 import AppEmp from './comps_employee/AppEmp'
 import Form from './comps/Form'
 import counterSlice from './featurers/counterSlice'
+import todosSlice from './featurers/todosSlice'
 
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
 import counter from './redux_comps/counter'
 import Counter from './redux_comps/counter'
+import AppTodo from './todos_redux_comps/appTodo'
 
 
 function App() {
 
   const myStore = configureStore({
     reducer: {
-      counterSlice
+      counterSlice,
+      todosSlice
     }
   })
 
@@ -36,6 +39,7 @@ function App() {
         <Route path="/employee:company" element={<AppEmp/>}/>
         <Route path="/form" element={<Form/>}/>
         <Route path="/counter" element={<Counter/>}/>
+        <Route path="/todos" element={<AppTodo/>}/>
         <Route path="*" element={<h2>Page 404, not found!</h2>}/>
       </Routes>
       </Provider>

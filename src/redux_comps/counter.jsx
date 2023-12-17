@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { add1, reset } from "../featurers/counterSlice"
+import { add1, reset, addCustom, reduceCustom } from "../featurers/counterSlice"
 
 const Counter = () => {
     const dispach = useDispatch();
@@ -17,6 +17,14 @@ const Counter = () => {
             <button className='btn btn-danger m-2' onClick={() => {
                 dispach(reset());
             }}>reset</button>
+
+            <button className='btn btn-info m-2' onClick={() => {
+                dispach(addCustom({val:5}));
+            }}>add 5</button>
+
+<button className='btn btn-dark m-2' onClick={() => {
+                dispach(reduceCustom({val:6}));
+            }}>reduce 6</button>
         </div>
     )
 }
