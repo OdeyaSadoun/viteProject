@@ -4,12 +4,12 @@ import CompanyItem from './CompanyItem';
 import { useDispatch, useSelector } from "react-redux"
 import { addWork } from "../featurers/resumeSlice"
 import EducationItem from './EducationItem';
-import {useForm} from "react-hook-form"
+import { useForm } from "react-hook-form"
 
 const ResumeInput = () => {
     const { works_ar, educations_ar } = useSelector(myStore => myStore.resumeSlice);
 
-    const { handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const [workComponents, setWorkComponents] = useState([<CompanyItem key={0} />]);
     const [eduComponents, setEduComponents] = useState([<EducationItem key={0} />]);
@@ -31,13 +31,13 @@ const ResumeInput = () => {
     };
 
 
-    const nameRef = useRef();
-    const imageRef = useRef();
+    const nameRef = register("name", { required: true, minLength: 2 });
+    const imageRef = register("image", { required: true, minLength: 4 });
 
     const onSub = (dataBody) => {
         console.log(dataBody);
-        dataBody.works = works_ar,
-        dataBody.educations = educations_ar
+        dataBody.works = works_ar;
+        dataBody.educations = educations_ar;
     }
 
     return (
@@ -46,7 +46,8 @@ const ResumeInput = () => {
             <form onSubmit={handleSubmit(onSub)} className=' form-control'>
 
                 <label className='my-2'>Full name:</label>
-                <input ref={nameRef} type='text' className='form-control' required />
+                <input {...nameRef} type='text' className='form-control' required />
+                {errors.name && <div className='text-danger'>* Enter valid name: min 2 chars</div>}
 
                 <label className='mt-4 fw-bold'>Work experience:</label>
                 {workComponents.map((component, index) => (
@@ -63,12 +64,13 @@ const ResumeInput = () => {
                 <button type='button' className='btn btn-dark my-2' onClick={
                     addEduComponent}>Add education</button>
 
-                    <br/>
-                    
-                <label className='my-2'>Image URL:</label>
-                <input ref={imageRef} type='text' className='form-control' required />
+                <br />
 
-                <button  className='btn btn-dark my-2' >Create resume</button>
+                <label className='my-2'>Image URL:</label>
+                <input {...imageRef} type='text' className='form-control' required />
+                {errors.image && <div className='text-danger'>* Enter valid name: min 4 chars</div>}
+
+                <button className='btn btn-dark my-2' >Create resume</button>
 
             </form>
         </div >
