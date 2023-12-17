@@ -5,7 +5,7 @@ import { addEducation } from "../featurers/resumeSlice"
 
 const EducationItem = () => {
     const dispatch = useDispatch();
-    const { education_ar } = useSelector(myStore => myStore.resumeSlice);
+    const { educations_ar } = useSelector(myStore => myStore.resumeSlice);
     const [id, setId] = useState(Date.now());
 
     const academicNameRef = useRef();
@@ -14,6 +14,8 @@ const EducationItem = () => {
     const fieldStudyRef = useRef();
     const gradeRef = useRef();
 
+
+
     const handleBlur = () => {
         const academicName = academicNameRef.current.value;
         const timeStart = timeStartRef.current.value;
@@ -21,7 +23,15 @@ const EducationItem = () => {
         const fieldStudy = fieldStudyRef.current.value;
         const grade = gradeRef.current.value;
 
-        if (academicName && timeStart && timeEnd && fieldStudy && grade) {
+        const isDuplicate = educations_ar.some(edu => (
+            edu.academicName === academicName &&
+            edu.timeStart === timeStart &&
+            edu.timeEnd === timeEnd &&
+            edu.fieldStudy === fieldStudy &&
+            edu.grade === grade 
+          ));
+
+        if (!isDuplicate && academicName && timeStart && timeEnd && fieldStudy && grade) {
             const newData = {
                 academicName,
                 timeStart,
@@ -32,7 +42,7 @@ const EducationItem = () => {
             };
 
             dispatch(addEducation({ edu: newData }));
-            console.log(education_ar);
+            console.log(educations_ar);
         }
     };
 

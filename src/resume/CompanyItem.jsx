@@ -14,13 +14,22 @@ const CompanyItem = () => {
     const checkboxRef = useRef();
     const roleRef = useRef();
 
+
     const handleBlur = () => {
         const companyName = companyNameRef.current.value;
         const timeStart = timeStartRef.current.value;
         const timeEnd = timeEndRef.current.value;
         const role = roleRef.current.value;
 
-        if (companyName && timeStart && timeEnd && role) {
+        const isDuplicate = educations_ar.some(edu => (
+            edu.companyName === companyName &&
+            edu.timeStart === timeStart &&
+            edu.timeEnd === timeEnd &&
+            edu.role === role 
+          ));
+
+
+        if (!isDuplicate && companyName && timeStart && timeEnd && role) {
             const newData = {
                 companyName,
                 timeStart,
