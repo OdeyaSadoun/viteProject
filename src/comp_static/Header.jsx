@@ -23,6 +23,9 @@ const Header = () => {
                         <li>
                             <Link to="/form">Form</Link>
                         </li>
+                        <li>
+                            <Link to="/counter">Counter</Link>
+                        </li>
                     </ul>
 
                 </nav>
