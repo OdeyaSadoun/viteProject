@@ -6,7 +6,7 @@ import { addWork } from "../featurers/resumeSlice"
 
 const ResumeInput = () => {
     const [works_ar, setWorks_ar] = useState([]);
-    const [renderedComponents, setRenderedComponents] = useState([]);
+    const [renderedComponents, setRenderedComponents] = useState([<CompanyItem setWorks_ar={setWorks_ar} works_ar={works_ar} key={0} />]);
 
     const addComponent = () => {
         // Create a new array with the existing rendered components and add a new component
@@ -19,13 +19,7 @@ const ResumeInput = () => {
         setRenderedComponents(updatedComponents);
     };
 
-    useEffect(() => {
-        console.log(works_ar);
-    }, [works_ar])
-
     const nameRef = useRef();
-
-
 
     return (
         <div>
@@ -36,15 +30,11 @@ const ResumeInput = () => {
                 <input ref={nameRef} type='text' className='form-control' required />
 
                 <label className='my-2'>Work experience:</label>
-                <CompanyItem setWorks_ar={setWorks_ar} works_ar={works_ar} />
-                {/* {works_ar.push(<CompanyItem key={Date.now()} />)} */}
-
-                <button type='button' className='btn btn-dark my-2' onClick={
-                    addComponent}>Add experience</button>
                 {renderedComponents.map((component, index) => (
                     <div key={index}>{component}</div>
                 ))}
-
+                <button type='button' className='btn btn-dark my-2' onClick={
+                    addComponent}>Add experience</button>
             </form>
         </div>
 
