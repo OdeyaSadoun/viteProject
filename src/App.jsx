@@ -10,6 +10,7 @@ import AppEmp from './comps_employee/AppEmp'
 import Form from './comps/Form'
 import counterSlice from './featurers/counterSlice'
 import todosSlice from './featurers/todosSlice'
+import resumeSlice from './featurers/resumeSlice'
 
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
@@ -26,7 +27,8 @@ function App() {
   const myStore = configureStore({
     reducer: {
       counterSlice,
-      todosSlice
+      todosSlice,
+      resumeSlice
     }
   })
 

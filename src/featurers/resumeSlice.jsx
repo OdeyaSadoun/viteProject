@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initValue = {
-    // user_name,
     works_ar: [],
     educations_ar: []
 }

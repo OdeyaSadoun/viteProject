@@ -1,33 +1,46 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRef } from 'react'
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector, useDispatch } from 'react-redux';
 import { addWork } from "../featurers/resumeSlice"
 
 const CompanyItem = (props) => {
-    const dispatch = useDispatch();
+    const dispach = useDispatch();
+    const { works_ar } = useSelector(myStore => myStore.resumeSlice);
+
     const companyNameRef = useRef();
     const timeStartRef = useRef();
     const timeEndRef = useRef();
 
+    const handleBlur = () => {
+        const companyName = companyNameRef.current.value;
+        const timeStart = timeStartRef.current.value;
+        const timeEnd = timeEndRef.current.value;
+
+        if (companyName && timeStart && timeEnd) {
+            const newData = {
+                companyName,
+                timeStart,
+                timeEnd: timeEnd || '',
+                id: Date.now()
+            };
+
+            dispach(addWork({ work: newData }));
+            console.log("ar", works_ar);
+        }
+    };
+
 
     return (
-        <div>
+        <div className='my-3'>
             <label className='md-1'>Company name:</label>
-            <input ref={companyNameRef} type='text' className='form-control' required />
+            <input onBlur={handleBlur} ref={companyNameRef} type='text' className='form-control' required />
 
             <label className='md-1'>Time frame:</label>
             <div className='d-flex'>
-                <input ref={timeStartRef} type='date' className='form-control me-2' required />
-                <input ref={timeEndRef} type='date' className='form-control ms-2' />
+                <input onBlur={handleBlur} ref={timeStartRef} type='date' className='form-control me-2' required />
+                <input onBlur={handleBlur} ref={timeEndRef} type='date' className='form-control ms-2' />
             </div>
-           <button type='button' onClick={() => {
-             {companyNameRef != undefined && timeStartRef != undefined && timeEndRef &&  props.setWorks_ar([...props.works_ar, {
-                companyName: companyNameRef.current.value,
-                timeStart: timeStartRef.current.value,
-                timeEnd: timeEndRef.current.value,
-                id: Date.now()
-            }])}
-           }} className='btn btn-outline-dark'>Add</button>
+
         </div>
     )
 }
