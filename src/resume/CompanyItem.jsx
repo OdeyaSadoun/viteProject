@@ -12,17 +12,20 @@ const CompanyItem = () => {
     const timeStartRef = useRef();
     const timeEndRef = useRef();
     const checkboxRef = useRef();
+    const roleRef = useRef();
 
     const handleBlur = () => {
         const companyName = companyNameRef.current.value;
         const timeStart = timeStartRef.current.value;
         const timeEnd = timeEndRef.current.value;
+        const role = roleRef.current.value;
 
-        if (companyName && timeStart && timeEnd) {
+        if (companyName && timeStart && timeEnd && role) {
             const newData = {
                 companyName,
                 timeStart,
                 timeEnd: timeEnd || '',
+                role,
                 id: id
             };
 
@@ -47,6 +50,9 @@ const CompanyItem = () => {
         <div className='my-3'>
             <label className='md-1'>Company name:</label>
             <input onBlur={handleBlur} ref={companyNameRef} type='text' className='form-control' required />
+
+            <label className='md-1'>Role:</label>
+            <input onBlur={handleBlur} ref={roleRef} type='text' className='form-control' required />
 
             <label className='md-1'>Time frame:</label>
             <div className='d-flex'>
