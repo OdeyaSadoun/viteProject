@@ -42,7 +42,6 @@ const EducationItem = () => {
             };
 
             dispatch(addEducation({ edu: newData }));
-            console.log(educations_ar);
         }
     };
 
@@ -62,8 +61,6 @@ const EducationItem = () => {
                 <input onBlur={handleBlur} ref={timeStartRef} type='date' className='form-control me-2' required />
                 <input onBlur={handleBlur} ref={timeEndRef} type='date' className='form-control ms-2' />
             </div>
-           
-
         </div>
     )
 }

@@ -21,11 +21,11 @@ const CompanyItem = () => {
         const timeEnd = timeEndRef.current.value;
         const role = roleRef.current.value;
 
-        const isDuplicate = educations_ar.some(edu => (
-            edu.companyName === companyName &&
-            edu.timeStart === timeStart &&
-            edu.timeEnd === timeEnd &&
-            edu.role === role 
+        const isDuplicate = works_ar.some(work => (
+            work.companyName === companyName &&
+            work.timeStart === timeStart &&
+            work.timeEnd === timeEnd &&
+            work.role === role 
           ));
 
 
