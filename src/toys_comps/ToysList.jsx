@@ -10,9 +10,8 @@ export default function FireLiveToys() {
         const ref = collection(db, 'toys')
         await addDoc(ref, {
             img_url: "eagle.jpg",
-            info: "new eagle toy",
             price: 10,
-            title: "small eagle toy"
+            title: "aaahygtrfed"
         })
     }
     const onDelClick = async (id) => {
