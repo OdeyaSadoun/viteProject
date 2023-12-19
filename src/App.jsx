@@ -20,6 +20,8 @@ import Counter from './redux_comps/counter'
 import AppTodo from './todos_redux_comps/appTodo'
 
 import AppResume from './resume/AppResume'
+import FireLiveToys from './toys_comps/ToysList'
+import AutoComp from './auto_comps/AutoComp'
 
 
 function App() {
@@ -45,6 +47,8 @@ function App() {
         <Route path="/counter" element={<Counter/>}/>
         <Route path="/todos" element={<AppTodo/>}/> 
         <Route path="/resume" element={<AppResume/>}/> 
+        <Route path="/toys" element={<FireLiveToys/>}/> 
+        <Route path="/users" element={<AutoComp/>}/> 
         <Route path="*" element={<h2>Page 404, not found!</h2>}/>
       </Routes>
       </Provider>
