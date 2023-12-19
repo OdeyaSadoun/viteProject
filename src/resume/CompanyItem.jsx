@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { addWork,deleteWork, updateEndTimeWork } from "../featurers/resumeSlice"
+import { addWork, deleteWork, updateEndTimeWork } from "../featurers/resumeSlice"
 
-const CompanyItem = ({index}) => {
+const CompanyItem = ({ index }) => {
     const dispatch = useDispatch();
     const { works_ar } = useSelector(myStore => myStore.resumeSlice);
     const [id, setId] = useState(Date.now());
@@ -14,35 +14,44 @@ const CompanyItem = ({index}) => {
 
 
     const handleChangeInputs = (e) => {
-        const { name, value } = e.target;
-        obj[name] = value;
-        setObj({ ...obj });
+        if (e) {   
+            const { name, value } = e.target;
+            obj[name] = value;
+            setObj({ ...obj });
+        }
 
+        console.log("check", isChecked);
+        console.log(obj["time_end"] || isChecked);
         if (obj["company_name"] && obj["time_start"] && (obj["time_end"] || isChecked) && obj["role"]) {
             obj["id"] = id;
+            obj["time_end"] = isChecked ? "" : obj["time_end"]
             setObj({ ...obj });
-            if(idList.indexOf(id) != -1){
-                console.log("there is exist");
-                dispatch(deleteWork({id, work: obj}))
+            if (idList.indexOf(id) != -1) {
+                dispatch(deleteWork({ id, work: obj }));
                 dispatch(addWork({ id, work: obj }));
             }
-            else{
+            else {
                 setIdList([...idList, id]);
-                console.log(idList);
                 dispatch(addWork({ id, work: obj }));
             }
         }
     };
 
     useEffect(() => {
-        // let workIndex = works_ar.filter(item => item.id == id)
-        dispatch(updateEndTimeWork({ id, end: obj["time_end"] }));
+        if (idList.indexOf(id) != -1) {
+            dispatch(updateEndTimeWork({ id, isChecked, end: obj["time_end"] }));
+        }
+        handleChangeInputs();
     }, [isChecked]);
 
 
     const handleCheckboxChange = () => {
-        setIsChecked(checkboxRef.current.checked);
+        console.log(checkboxRef.current.checked);
+        setIsChecked(checkboxRef.current.checked)
     };
+
+
+
 
     return (
         <div className='my-3'>

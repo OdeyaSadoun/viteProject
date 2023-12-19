@@ -26,7 +26,7 @@ const resumeSlice = createSlice({
                 if (work.id == id) {
                     return {
                         ...work,
-                        timeEnd: work.timeEnd == '' ? end : ''
+                        time_end: action.payload.isChecked ? end : ''
                     };
                 }
                 return work;
@@ -47,7 +47,7 @@ const resumeSlice = createSlice({
                 if (edu.id == id) {
                     return {
                         ...edu,
-                        timeEnd: edu.timeEnd == '' ? end : ''
+                        time_end: action.payload.isChecked ? end : ''
                     };
                 }
                 return edu;
