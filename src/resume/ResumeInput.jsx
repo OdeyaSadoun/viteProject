@@ -65,7 +65,7 @@ const ResumeInput = () => {
                 ))}
                 <button type='button' className='btn btn-dark my-2' onClick={
                     addWorkComponent}>Add experience</button>
-                {/* <br />
+                <br />
 
                 <label className='mt-4 fw-bold'>Education:</label>
                 {eduComponents.map((component, index) => (
@@ -74,7 +74,7 @@ const ResumeInput = () => {
                 <button type='button' className='btn btn-dark my-2' onClick={
                     addEduComponent}>Add education</button>
 
-                <br />  */}
+                <br /> 
 
                 <label className='my-2'>Image URL:</label>
                 <input {...imageRef} type='text' className='form-control' required />

@@ -40,6 +40,13 @@ const resumeSlice = createSlice({
         addEducation: (state, action) => {
             state.educations_ar.push(action.payload.edu);
         },
+        deleteEducation: (state, action) => {
+            const updatedEdus = state.educations_ar.filter(edu => edu.id !== action.payload.edu.id);
+            return {
+                ...state,
+                educations_ar: updatedEdus,
+            };
+        },
         updateEndTimeEducation: (state, action) => {
             const { id, end } = action.payload;
 
@@ -61,5 +68,5 @@ const resumeSlice = createSlice({
     }
 })
 
-export const { addWork,deleteWork, addEducation, updateEndTimeWork, updateEndTimeEducation } = resumeSlice.actions;
+export const { addWork, deleteWork, addEducation, deleteEducation, updateEndTimeWork, updateEndTimeEducation } = resumeSlice.actions;
 export default resumeSlice.reducer;

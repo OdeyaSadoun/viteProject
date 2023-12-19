@@ -5,7 +5,6 @@ import { addWork, deleteWork, updateEndTimeWork } from "../featurers/resumeSlice
 
 const CompanyItem = ({ index }) => {
     const dispatch = useDispatch();
-    const { works_ar } = useSelector(myStore => myStore.resumeSlice);
     const [id, setId] = useState(Date.now());
     const [obj, setObj] = useState({});
     const [isChecked, setIsChecked] = useState(false);
