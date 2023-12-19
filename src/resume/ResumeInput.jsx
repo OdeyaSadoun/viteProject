@@ -39,6 +39,7 @@ const ResumeInput = () => {
 
 
     const nameRef = register("name", { required: true, minLength: 2 });
+    const titleRef = register("title", { required: true, minLength: 2 });
     const imageRef = register("image", { required: true, minLength: 4 });
 
     const onSub = (dataBody) => {
@@ -58,6 +59,10 @@ const ResumeInput = () => {
                 <label className='my-2'>Full name:</label>
                 <input {...nameRef} type='text' className='form-control' required />
                 {errors.name && <div className='text-danger'>* Enter valid name: min 2 chars</div>}
+
+                <label className='my-2'>Title:</label>
+                <input {...titleRef} type='text' className='form-control' required />
+                {errors.title && <div className='text-danger'>* Enter valid title: min 2 chars</div>}
 
                 <label className='mt-4 fw-bold'>Work experience:</label>
                 {workComponents.map((component, index) => (
