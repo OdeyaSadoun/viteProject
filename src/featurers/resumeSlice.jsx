@@ -12,6 +12,13 @@ const resumeSlice = createSlice({
         addWork: (state, action) => {
             state.works_ar.push(action.payload.work);
         },
+        deleteWork: (state, action) => {
+            const updatedWorks = state.works_ar.filter(work => work.id !== action.payload.work.id);
+            return {
+                ...state,
+                works_ar: updatedWorks,
+            };
+        },
         updateEndTimeWork: (state, action) => {
             const { id, end } = action.payload;
 
@@ -54,5 +61,5 @@ const resumeSlice = createSlice({
     }
 })
 
-export const { addWork, addEducation, updateEndTimeWork, updateEndTimeEducation } = resumeSlice.actions;
+export const { addWork,deleteWork, addEducation, updateEndTimeWork, updateEndTimeEducation } = resumeSlice.actions;
 export default resumeSlice.reducer;

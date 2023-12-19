@@ -2,22 +2,29 @@ import React, { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import CompanyItem from './CompanyItem';
 import { useDispatch, useSelector } from "react-redux"
-import { addWork } from "../featurers/resumeSlice"
 import EducationItem from './EducationItem';
 import { useForm } from "react-hook-form"
+import ResumeOutput from './ResumeOutput';
 
 const ResumeInput = () => {
     const { works_ar, educations_ar } = useSelector(myStore => myStore.resumeSlice);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const [workComponents, setWorkComponents] = useState([<CompanyItem key={0} />]);
-    const [eduComponents, setEduComponents] = useState([<EducationItem key={0} />]);
+    const [workComponents, setWorkComponents] = useState([<CompanyItem index={0} />]);
+    const [eduComponents, setEduComponents] = useState([<EducationItem index={0} />]);
+
+    const [toggle, setToggle] = useState(false);
+    const [resumeObject, setResumeObject] = useState({});
+
+    const showResume = () => {
+        setToggle(!toggle)
+    }
 
     const addWorkComponent = () => {
         const updatedComponents = [
             ...workComponents,
-            <CompanyItem key={workComponents.length} />
+            <CompanyItem index={workComponents.length} />
         ];
         setWorkComponents(updatedComponents);
     };
@@ -25,7 +32,7 @@ const ResumeInput = () => {
     const addEduComponent = () => {
         const updatedComponents = [
             ...eduComponents,
-            <EducationItem key={eduComponents.length} />
+            <EducationItem index={eduComponents.length} />
         ];
         setEduComponents(updatedComponents);
     };
@@ -38,12 +45,15 @@ const ResumeInput = () => {
         console.log(dataBody);
         dataBody.works = works_ar;
         dataBody.educations = educations_ar;
+        showResume();
+        setResumeObject(dataBody);
     }
 
     return (
-        <div className='container mx-auto col-md-6'>
+        <div className='container'>
+            <div className='container mx-auto col-md-6'>
             <h2>Fill in your deatiles:</h2>
-            <form onSubmit={handleSubmit(onSub)} className=' form-control'>
+            <form onSubmit={handleSubmit(onSub)} className=' form-control  '>
 
                 <label className='my-2'>Full name:</label>
                 <input {...nameRef} type='text' className='form-control' required />
@@ -51,28 +61,31 @@ const ResumeInput = () => {
 
                 <label className='mt-4 fw-bold'>Work experience:</label>
                 {workComponents.map((component, index) => (
-                    <div key={index}>{component}</div>
+                    <div key={index} index={index} >{component}</div>
                 ))}
                 <button type='button' className='btn btn-dark my-2' onClick={
                     addWorkComponent}>Add experience</button>
-                <br />
+                {/* <br />
 
                 <label className='mt-4 fw-bold'>Education:</label>
                 {eduComponents.map((component, index) => (
-                    <div key={index}>{component}</div>
+                    <div key={index} index={index}>{component}</div>
                 ))}
                 <button type='button' className='btn btn-dark my-2' onClick={
                     addEduComponent}>Add education</button>
 
-                <br />
+                <br />  */}
 
                 <label className='my-2'>Image URL:</label>
                 <input {...imageRef} type='text' className='form-control' required />
                 {errors.image && <div className='text-danger'>* Enter valid name: min 4 chars</div>}
 
                 <button className='btn btn-dark my-2' >Create resume</button>
-
+               
             </form>
+            </div>
+            {toggle == true && <ResumeOutput resumeObject={resumeObject} />}
+
         </div >
 
     )

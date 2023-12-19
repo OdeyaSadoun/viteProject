@@ -35,7 +35,7 @@ const EducationItem = () => {
             const newData = {
                 academicName,
                 timeStart,
-                timeEnd: timeEnd || '',
+                timeEnd: timeEnd,
                 fieldStudy,
                 grade,
                 id

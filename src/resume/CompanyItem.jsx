@@ -1,74 +1,64 @@
 import React, { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { addWork, updateEndTimeWork } from "../featurers/resumeSlice"
+import { addWork,deleteWork, updateEndTimeWork } from "../featurers/resumeSlice"
 
-const CompanyItem = () => {
+const CompanyItem = ({index}) => {
     const dispatch = useDispatch();
     const { works_ar } = useSelector(myStore => myStore.resumeSlice);
     const [id, setId] = useState(Date.now());
-
-    const companyNameRef = useRef();
-    const timeStartRef = useRef();
-    const timeEndRef = useRef();
+    const [obj, setObj] = useState({});
+    const [isChecked, setIsChecked] = useState(false);
     const checkboxRef = useRef();
-    const roleRef = useRef();
+    const [idList, setIdList] = useState([]);
 
 
-    const handleBlur = () => {
-        const companyName = companyNameRef.current.value;
-        const timeStart = timeStartRef.current.value;
-        const timeEnd = timeEndRef.current.value;
-        const role = roleRef.current.value;
+    const handleChangeInputs = (e) => {
+        const { name, value } = e.target;
+        obj[name] = value;
+        setObj({ ...obj });
 
-        const isDuplicate = works_ar.some(work => (
-            work.companyName === companyName &&
-            work.timeStart === timeStart &&
-            work.timeEnd === timeEnd &&
-            work.role === role 
-          ));
-
-
-        if (!isDuplicate && companyName && timeStart && timeEnd && role) {
-            const newData = {
-                companyName,
-                timeStart,
-                timeEnd: timeEnd || '',
-                role,
-                id: id
-            };
-
-            dispatch(addWork({ work: newData }));
-            console.log(works_ar);
+        if (obj["company_name"] && obj["time_start"] && (obj["time_end"] || isChecked) && obj["role"]) {
+            obj["id"] = id;
+            setObj({ ...obj });
+            if(idList.indexOf(id) != -1){
+                console.log("there is exist");
+                dispatch(deleteWork({id, work: obj}))
+                dispatch(addWork({ id, work: obj }));
+            }
+            else{
+                setIdList([...idList, id]);
+                console.log(idList);
+                dispatch(addWork({ id, work: obj }));
+            }
         }
     };
 
-    const handleCheckboxChange = () => {
-        const isChecked = checkboxRef.current.checked;
-        console.log(isChecked);
-        const timeEnd = isChecked ? "yyy" : timeEndRef.current.value;
-    
-        console.log("timeEnd",timeEnd);
-    
-        dispatch(updateEndTimeWork({ id, end: timeEnd }));
+    useEffect(() => {
+        // let workIndex = works_ar.filter(item => item.id == id)
+        dispatch(updateEndTimeWork({ id, end: obj["time_end"] }));
+    }, [isChecked]);
 
-        console.log(works_ar);
-      };
+
+    const handleCheckboxChange = () => {
+        setIsChecked(checkboxRef.current.checked);
+    };
 
     return (
         <div className='my-3'>
             <label className='md-1'>Company name:</label>
-            <input onBlur={handleBlur} ref={companyNameRef} type='text' className='form-control' required />
+            <input name="company_name" onChange={handleChangeInputs} type='text' className='form-control' required />
 
             <label className='md-1'>Role:</label>
-            <input onBlur={handleBlur} ref={roleRef} type='text' className='form-control' required />
+            <input name="role" onChange={handleChangeInputs}
+                type='text' className='form-control' required />
 
             <label className='md-1'>Time frame:</label>
             <div className='d-flex'>
-                <input onBlur={handleBlur} ref={timeStartRef} type='date' className='form-control me-2' required />
-                <input onBlur={handleBlur} ref={timeEndRef} type='date' className='form-control ms-2' />
+                <input name="time_start" onChange={handleChangeInputs} type='date' className='form-control me-2' required />
+                <input name="time_end" onChange={handleChangeInputs} type='date' className='form-control ms-2' />
             </div>
-            <input ref={checkboxRef} onChange={handleCheckboxChange} className="form-check-input my-1 me-1" type='checkbox'/> 
+            <input ref={checkboxRef} onChange={handleCheckboxChange} className="form-check-input my-1 me-1" type='checkbox' />
             <label className="form-check-label">I'm currently working there.</label>
 
         </div>
