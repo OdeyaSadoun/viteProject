@@ -27,7 +27,7 @@ export default function Login() {
         console.log(user.uid);
         setUserId(user.uid);
         setLoginUser(true);
-        nav('../resume/showall')
+        nav('../resume/showall');
       }
     });
   }

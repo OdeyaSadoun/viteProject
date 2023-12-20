@@ -24,6 +24,7 @@ export default function Signup() {
         console.log(user.uid);
         setUserId(user.uid);
         setLoginUser(true);
+        nav('../resume/add');
       }
     });
   }

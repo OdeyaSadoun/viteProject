@@ -15,12 +15,12 @@ const Header = () => {
                             <li>
                                 <Link to="/"><strong>Home</strong></Link>
                             </li>
-                            <li>
+                            {!loginUser && <li>
                                 <Link to="/users/login">Login</Link>
-                            </li>
-                            <li>
+                            </li>}
+                            {!loginUser && <li>
                                 <Link to="/users/signup">SignUp</Link>
-                            </li>
+                            </li>}
 
                             {loginUser && <li>
                                 <Link to="/resume/add">Add new resume</Link>

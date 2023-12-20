@@ -52,7 +52,6 @@ const ResumeInput = () => {
     const imageRef = register("image", { required: true, minLength: 4 });
 
     const onSub = (dataBody) => {
-        console.log(dataBody);
         dataBody.works = works_ar;
         dataBody.educations = educations_ar;
         dataBody.userid = userId;
