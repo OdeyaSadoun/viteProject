@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import EducationItem from './EducationItem';
 import { useForm } from "react-hook-form"
 import ResumeOutput from './ResumeOutput';
+// import GeneratePdf from '../comp_static/generatePdf';
 
 const ResumeInput = () => {
     const { works_ar, educations_ar } = useSelector(myStore => myStore.resumeSlice);
@@ -20,6 +21,10 @@ const ResumeInput = () => {
     const showResume = () => {
         setToggle(!toggle)
     }
+
+    const generatePdf = () => {
+        //todo - take the output from the componnet and save it do pdf
+    };
 
     const addWorkComponent = () => {
         const updatedComponents = [
@@ -49,6 +54,7 @@ const ResumeInput = () => {
         showResume();
         setResumeObject(dataBody);
     }
+
 
     return (
         <div className='container d-flex'>
@@ -88,12 +94,15 @@ const ResumeInput = () => {
                     <button className='btn btn-dark my-2' >Create resume</button>
 
                 </form>
+                <button onClick={generatePdf} className="btn btn-dark my-2">
+                    Create PDF
+                </button>
             </div>
-            <div>
+
+            <div className='col-md-6'>
                 {toggle == true && <ResumeOutput resumeObject={resumeObject} />}
             </div>
         </div >
-
     )
 }
 
