@@ -8,10 +8,10 @@ import { auth } from '../firebase/config';
 
 
 export default function Login() {
-  const {userId, setUserId} = useContext(AppContext);
-  const {loginUser, setLoginUser} = useContext(AppContext);
+  const { userId, setUserId } = useContext(AppContext);
+  const { loginUser, setLoginUser } = useContext(AppContext);
 
-  const {error, login} = useLogin()
+  const { error, login } = useLogin()
   const mailRef = useRef();
   const passRef = useRef();
 
@@ -24,21 +24,29 @@ export default function Login() {
         console.log(user.uid);
         setUserId(user.uid);
         setLoginUser(true);
-      }
-    });
+      }
+    });
   }
 
 
   return (
-    <div className='container'>
-      <form onSubmit={onSub}>
+    <div className='container mx-auto col-md-6'>
+      <form className='form-control my-5 p-5' onSubmit={onSub}>
+        <h2 className='text-center mb-5'>Hello:) please login</h2>
         <label>Email:</label>
-        <input ref={mailRef} type="email" />
-        <br/>
+        <input className='form-control' ref={mailRef} type="email" />
+        <br />
         <label>Password:</label>
-        <input ref={passRef} type="password" />
+        <input className='form-control' ref={passRef} type="password" />
         <h3 className='text-danger'>{error}</h3>
-        <button>Log in</button>
+        <div className='d-flex'>
+        <button className='btn btn-outline-danger mt-2 me-3'>Log in</button>
+        <button type='reset' className='btn btn-outline-dark mt-2'>Reset</button>
+        </div>
+        <div className='mt-4 text-center'>
+        Are you not registered yet?  
+        <a className='mx-2' href='/users/signup'>Register now</a>
+        </div>
       </form>
     </div>
   )

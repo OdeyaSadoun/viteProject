@@ -28,15 +28,23 @@ export default function Signup() {
 
 
   return (
-    <div className='container'>
-      <form onSubmit={onSub}>
+       <div className='container mx-auto col-md-6'>
+      <form className='form-control my-5 p-5' onSubmit={onSub}>
+        <h2 className='text-center mb-5'>Hi:) please sign up</h2>
         <label>Email:</label>
-        <input ref={mailRef} type="email" />
-        <br/>
+        <input className='form-control' ref={mailRef} type="email" />
+        <br />
         <label>Password:</label>
-        <input ref={passRef} type="password" />
+        <input className='form-control' ref={passRef} type="password" />
         <h3 className='text-danger'>{error}</h3>
-        <button>Sing up</button>
+        <div className='d-flex'>
+        <button className='btn btn-outline-danger mt-2 me-3'>Sign up</button>
+        <button type='reset' className='btn btn-outline-dark mt-2'>Reset</button>
+        </div>
+        <div className='mt-4 text-center'>
+        Already have an account? 
+        <a className='mx-2' href='/users/login'>Login now</a>
+        </div>
       </form>
     </div>
   )
