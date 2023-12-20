@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useRef } from 'react'
 import CompanyItem from './CompanyItem';
 import { useDispatch, useSelector } from "react-redux"
 import EducationItem from './EducationItem';
 import { useForm } from "react-hook-form"
 import ResumeOutput from './ResumeOutput';
+import { useCollection } from '../hooks/useCollection'
+import { db } from '../firebase/config'
+import { collection, addDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore'
+import { AppContext } from '../context/context';
+
 // import GeneratePdf from '../comp_static/generatePdf';
 
 const ResumeInput = () => {
+    const {userId} = useContext(AppContext)
     const { works_ar, educations_ar } = useSelector(myStore => myStore.resumeSlice);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -22,9 +28,7 @@ const ResumeInput = () => {
         setToggle(!toggle)
     }
 
-    const generatePdf = () => {
-        //todo - take the output from the componnet and save it do pdf
-    };
+
 
     const addWorkComponent = () => {
         const updatedComponents = [
@@ -51,10 +55,19 @@ const ResumeInput = () => {
         console.log(dataBody);
         dataBody.works = works_ar;
         dataBody.educations = educations_ar;
+        dataBody.userid = userId;
+        dataBody.id = Date.now();
         showResume();
         setResumeObject(dataBody);
+        addNewCVDoc(dataBody);
     }
 
+    const addNewCVDoc = async (dataBody) => {
+        const ref = collection(db, 'cvs')
+        await addDoc(ref, {
+            ...dataBody
+        })
+    }
 
     return (
         <div className='container d-flex'>
@@ -94,9 +107,6 @@ const ResumeInput = () => {
                     <button className='btn btn-dark my-2' >Create resume</button>
 
                 </form>
-                <button onClick={generatePdf} className="btn btn-dark my-2">
-                    Create PDF
-                </button>
             </div>
 
             <div className='col-md-6'>

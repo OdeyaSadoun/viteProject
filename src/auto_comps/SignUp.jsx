@@ -1,8 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import { useSignup } from '../hooks/useSingUp ';
-
+import { auth, db } from '../firebase/config'
+import { collection, addDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore'
+import { AppContext } from '../context/context';
+import{onAuthStateChanged} from 'firebase/auth'
 
 export default function Signup() {
+
+  const {userId, setUserId} = useContext(AppContext);
+
   const {error, signup} = useSignup()
   const mailRef = useRef();
   const passRef = useRef();
@@ -10,7 +16,14 @@ export default function Signup() {
 
   const onSub = (e) => {
     e.preventDefault();
-    signup(mailRef.current.value, passRef.current.value)
+    signup(mailRef.current.value, passRef.current.value);
+    
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user.uid);
+        setUserId(user.uid);
+      }
+    });
   }
 
 

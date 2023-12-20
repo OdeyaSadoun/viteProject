@@ -9,7 +9,7 @@ const Header = () => {
                 <div className='col-auto'>
                     <h2>My Logo</h2>
                 </div>
-                <nav className='nav col-auto'>
+                <nav className='nav col-auto mt-2'>
                     <ul>
                         <li>
                             <Link to="/">Home</Link>
@@ -22,9 +22,14 @@ const Header = () => {
                         </li>
                                              
                         <li>
-                            <Link to="/resume">Resume</Link>
+                            <Link to="/resume/add">Add new resume</Link>
                         </li>
-
+                        <li>
+                            <Link to="/resume/showall">Show your resume</Link>
+                        </li>
+                        <li>
+                            <Link to="/users/logout">Logout</Link>
+                        </li>
                     </ul>
 
                 </nav>
