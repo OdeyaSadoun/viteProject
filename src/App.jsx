@@ -12,6 +12,8 @@ import { AppContext } from './context/context'
 import { useState } from 'react'
 import ResumeInput from './resume/ResumeInput'
 import ListOfResumes from './resume/ListOfResumes'
+import ResumeOutput from './resume/ResumeOutput'
+import ResumeSingle from './resume/ResumeSingle'
 
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
         <Route index element={<Home/>}/>
         <Route path="/resume/add" element={<ResumeInput/>}/> 
         <Route path="/resume/showall" element={<ListOfResumes/>}/> 
+        <Route path="/resume/:id" element={<ResumeSingle/>}/> 
         <Route path="/users/login" element={<Login/>}/> 
         <Route path="/users/signup" element={<Signup/>}/> 
         {/* <Route path="/users/logout" element={}/>  */}
