@@ -2,11 +2,14 @@
 import React, { useContext, useRef } from 'react'
 import { useLogin } from '../hooks/useLogin'
 import { AppContext } from '../context/context';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase/config';
 
 
 
 export default function Login() {
   const {userId, setUserId} = useContext(AppContext);
+  const {loginUser, setLoginUser} = useContext(AppContext);
 
   const {error, login} = useLogin()
   const mailRef = useRef();
@@ -20,6 +23,7 @@ export default function Login() {
       if (user) {
         console.log(user.uid);
         setUserId(user.uid);
+        setLoginUser(true);
       }
     });
   }

@@ -16,7 +16,8 @@ import ListOfResumes from './resume/ListOfResumes'
 
 function App() {
 
-  const [userId, setUserId] = useState("")
+  const [userId, setUserId] = useState("");
+  const [loginUser, setLoginUser] = useState(false);
 
   const myStore = configureStore({
     reducer: {
@@ -27,7 +28,7 @@ function App() {
   return (
     <BrowserRouter>
     <Provider store={myStore}>
-    <AppContext.Provider value={{userId, setUserId}}>
+    <AppContext.Provider value={{userId, setUserId, loginUser, setLoginUser}}>
       <Header/>
       <Routes>
         <Route index element={<Home/>}/>
@@ -35,7 +36,7 @@ function App() {
         <Route path="/resume/showall" element={<ListOfResumes/>}/> 
         <Route path="/users/login" element={<Login/>}/> 
         <Route path="/users/signup" element={<Signup/>}/> 
-        <Route path="/users/logout" element={<Logout/>}/> 
+        {/* <Route path="/users/logout" element={}/>  */}
         <Route path="*" element={<h2>Page 404, not found!</h2>}/>
       </Routes>
       </AppContext.Provider>

@@ -1,42 +1,41 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Logout from '../auto_comps/Logout'
+import { AppContext } from '../context/context'
+import { useContext } from 'react'
 
 const Header = () => {
-  return (
-    <header className='container-fluid bg-dark text-white'>
-        <div className='container'>
-            <div className='row align-item-center'>
-                <div className='col-auto'>
-                    <h2>My Logo</h2>
-                </div>
-                <nav className='nav col-auto mt-2'>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/users/login">Login</Link>
-                        </li>
-                        <li>
-                            <Link to="/users/signup">SignUp</Link>
-                        </li>
-                                             
-                        <li>
-                            <Link to="/resume/add">Add new resume</Link>
-                        </li>
-                        <li>
-                            <Link to="/resume/showall">Show your resume</Link>
-                        </li>
-                        <li>
-                            <Link to="/users/logout">Logout</Link>
-                        </li>
-                    </ul>
+    const { loginUser } = useContext(AppContext);
+    return (
+        <header className='container-fluid bg-danger text-white'>
+            <div className='container'>
+                <div className='d-flex align-item-center justify-content-between'>
+                    <nav className='nav col-auto m-2'>
+                        <ul>
+                            <li>
+                                <Link to="/"><strong>Home</strong></Link>
+                            </li>
+                            <li>
+                                <Link to="/users/login">Login</Link>
+                            </li>
+                            <li>
+                                <Link to="/users/signup">SignUp</Link>
+                            </li>
 
-                </nav>
+                            {loginUser && <li>
+                                <Link to="/resume/add">Add new resume</Link>
+                            </li>}
+                            {loginUser && <li>
+                                <Link to="/resume/showall">Show your resume</Link>
+                            </li>}
+                        </ul>
+
+                    </nav>
+                    {loginUser && <Logout />}
+                </div>
             </div>
-        </div>
-    </header>
-  )
+        </header>
+    )
 }
 
 export default Header
