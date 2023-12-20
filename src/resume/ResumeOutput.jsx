@@ -24,14 +24,30 @@ const ResumeOutput = (props) => {
 
             {/* work_exp */}
             <div className='my-3 '>
-                <h4>work experience:</h4>
+                <h4>Work experience:</h4>
                 {user.works.map(work => {
                     return <div key={work.id}>
                         <p><strong>{work.company_name}</strong></p>
                         <p>{work.role}</p>
                         <div className='d-flex'>
-                            <p><strong  className='me-3'> from: </strong> {work.time_start} </p>
-                            {work.time_end != "" && <p><strong  className='mx-3'> to: </strong>{work.time_end}</p>}
+                            <p><strong className='me-3'> from: </strong> {work.time_start} </p>
+                            {work.time_end != "" && <p><strong className='mx-3'> to: </strong>{work.time_end}</p>}
+                        </div>
+                    </div>
+                })}
+            </div>
+
+            {/* educations */}
+            <div className='my-3 '>
+                <h4>Education:</h4>
+                {user.educations.map(edu => {
+                    return <div key={edu.id}>
+                        <p><strong>{edu.academic_name}</strong></p>
+                        <p>{edu.field_study}</p>
+                        <p>{edu.grade}</p>
+                        <div className='d-flex'>
+                            <p><strong className='me-3'> from: </strong> {edu.time_start} </p>
+                            {edu.time_end != "" && <p><strong className='mx-3'> to: </strong>{edu.time_end}</p>}
                         </div>
                     </div>
                 })}
