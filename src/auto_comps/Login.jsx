@@ -4,12 +4,15 @@ import { useLogin } from '../hooks/useLogin'
 import { AppContext } from '../context/context';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase/config';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function Login() {
   const { userId, setUserId } = useContext(AppContext);
   const { loginUser, setLoginUser } = useContext(AppContext);
+
+  const nav = useNavigate();
 
   const { error, login } = useLogin()
   const mailRef = useRef();
@@ -24,6 +27,7 @@ export default function Login() {
         console.log(user.uid);
         setUserId(user.uid);
         setLoginUser(true);
+        nav('../resume/showall')
       }
     });
   }
