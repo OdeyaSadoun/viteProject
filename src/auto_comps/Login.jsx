@@ -34,10 +34,10 @@ export default function Login() {
       <form className='form-control my-5 p-5' onSubmit={onSub}>
         <h2 className='text-center mb-5'>Hello:) please login</h2>
         <label>Email:</label>
-        <input className='form-control' ref={mailRef} type="email" />
+        <input className='form-control' ref={mailRef} type="email" required/>
         <br />
         <label>Password:</label>
-        <input className='form-control' ref={passRef} type="password" />
+        <input className='form-control' ref={passRef} type="password" required/>
         <h3 className='text-danger'>{error}</h3>
         <div className='d-flex'>
         <button className='btn btn-outline-danger mt-2 me-3'>Log in</button>
