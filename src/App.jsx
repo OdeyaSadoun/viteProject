@@ -22,6 +22,8 @@ import AppTodo from './todos_redux_comps/appTodo'
 import AppResume from './resume/AppResume'
 import FireLiveToys from './toys_comps/ToysList'
 import AutoComp from './auto_comps/AutoComp'
+import Login from './auto_comps/Login'
+import Signup from './auto_comps/SignUp'
 
 
 function App() {
@@ -40,15 +42,9 @@ function App() {
       <Header/>
       <Routes>
         <Route index element={<Home/>}/>
-        <Route path="/about" element={<About/>}/>
-        <Route path="/employee" element={<AppEmp/>}/>
-        <Route path="/employee:company" element={<AppEmp/>}/>
-        <Route path="/form" element={<Form/>}/>
-        <Route path="/counter" element={<Counter/>}/>
-        <Route path="/todos" element={<AppTodo/>}/> 
         <Route path="/resume" element={<AppResume/>}/> 
-        <Route path="/toys" element={<FireLiveToys/>}/> 
-        <Route path="/users" element={<AutoComp/>}/> 
+        <Route path="/users/login" element={<Login/>}/> 
+        <Route path="/users/signup" element={<Signup/>}/> 
         <Route path="*" element={<h2>Page 404, not found!</h2>}/>
       </Routes>
       </Provider>
