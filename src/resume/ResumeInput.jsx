@@ -9,11 +9,12 @@ import { useCollection } from '../hooks/useCollection'
 import { db } from '../firebase/config'
 import { collection, addDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore'
 import { AppContext } from '../context/context';
+import ImageUploadComponent from '../comp_static/ImageUploadComponet';
 
 // import GeneratePdf from '../comp_static/generatePdf';
 
 const ResumeInput = () => {
-    const {userId} = useContext(AppContext)
+    const { userId } = useContext(AppContext)
     const { works_ar, educations_ar } = useSelector(myStore => myStore.resumeSlice);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -23,7 +24,21 @@ const ResumeInput = () => {
 
     const [toggle, setToggle] = useState(false);
     const [resumeObject, setResumeObject] = useState({});
+    const [imageURL, setImageURL] = useState(null);
 
+    const handleImageChange = (event) => {
+      const selectedFile = event.target.files[0];
+      console.log(URL.createObjectURL(selectedFile));
+      setImageURL(URL.createObjectURL(selectedFile));
+    //   if (selectedFile) {
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //       setImage(reader.result);
+    //     };
+        // reader.readAsDataURL(selectedFile);
+      
+    };
+  
     const showResume = () => {
         setToggle(!toggle)
     }
@@ -49,13 +64,14 @@ const ResumeInput = () => {
 
     const nameRef = register("name", { required: true, minLength: 2 });
     const titleRef = register("title", { required: true, minLength: 2 });
-    const imageRef = register("image", { required: true, minLength: 4 });
+    // const imageRef = register("image", { required: true, minLength: 4 });
 
     const onSub = (dataBody) => {
         dataBody.works = works_ar;
         dataBody.educations = educations_ar;
         dataBody.userid = userId;
         dataBody.id = Date.now();
+        dataBody.image = imageURL;
         showResume();
         setResumeObject(dataBody);
         addNewCVDoc(dataBody);
@@ -99,10 +115,16 @@ const ResumeInput = () => {
 
                     <br />
 
-                    <label className='my-2'>Image URL:</label>
-                    <input {...imageRef} type='text' className='form-control' required />
-                    {errors.image && <div className='text-danger'>* Enter valid name: min 4 chars</div>}
-
+                    <label className='my-2'>Image:</label>
+                    {/* <ImageUploadComponent/> */}
+                    <h2>Image Upload</h2>
+                    <input type="file" accept="image/*" onChange={handleImageChange} />
+                    {imageURL && (
+                        <div>
+                            <h3>Preview:</h3>
+                            <img src={imageURL} alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '300px' }} />
+                        </div>
+                    )}
                     <button className='btn btn-dark my-2' >Create resume</button>
 
                 </form>

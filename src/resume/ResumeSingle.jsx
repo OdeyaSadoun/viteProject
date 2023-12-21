@@ -32,7 +32,7 @@ const ResumeSingle = () => {
     }
     
     return (
-        <div>
+        <div className='container mx-auto col-md-6'>
             {resumeData ? (
                 <ResumeOutput resumeObject={resumeData} />
             ) : (

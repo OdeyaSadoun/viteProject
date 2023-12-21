@@ -27,7 +27,7 @@ const ResumeOutput = (props) => {
 
     return (
         <div>
-            <div className='output container m-5 bg-info'>
+            <div className='output container m-5'>
 
                 <div className='header_cv d-flex align-items-center'>
                     <div>
@@ -74,6 +74,20 @@ const ResumeOutput = (props) => {
                 </div>
 
 
+            </div>
+            <div>
+                <button onClick={() => {
+                    document.querySelector(".output").className = "output container m-5 bg-info";
+                }} className='btn btn-info'>1</button>
+                <button onClick={() => {
+                    document.querySelector(".output").className = " output container m-5 bg-dark text-danger";
+                }} className='btn btn-dark'>2</button>
+                <button onClick={() => {
+                    document.querySelector(".output").className = "output container m-5 bg-danger";
+                }} className='btn btn-danger'>3</button>
+                <button onClick={() => {
+                    document.querySelector(".output").className = "output container m-5 bg-warning";
+                }} className='btn btn-warning'>4</button>
             </div>
             <button onClick={downloadPDF}>Download</button>
         </div>
