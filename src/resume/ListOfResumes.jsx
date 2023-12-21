@@ -13,14 +13,11 @@ const ListOfResumes = () => {
         <div>
             <h2 className='text-center my-4'>Your CVs:</h2>
             <div className='container mx-auto d-flex flex-wrap justify-content-around'>
-                {(cvs.filter(item => item.userid == userId)).map(item => {
-                    return (
-                        <div className='border shadow p-2 col-md-4'>
-                            <CvItem key={item.id} item={item} />
-                        </div>
-                    )
-                })}
-
+                {(cvs.filter(item => item.userid === userId)).map(item => (
+                    <div className='border shadow p-2 col-md-4' key={item.id}>
+                        <CvItem item={item} />
+                    </div>
+                ))}
             </div>
         </div>
     )

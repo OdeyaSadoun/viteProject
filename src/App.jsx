@@ -20,6 +20,7 @@ function App() {
 
   const [userId, setUserId] = useState("");
   const [loginUser, setLoginUser] = useState(false);
+  const [cv, setCv] = useState({});
 
   const myStore = configureStore({
     reducer: {
@@ -30,7 +31,7 @@ function App() {
   return (
     <BrowserRouter>
     <Provider store={myStore}>
-    <AppContext.Provider value={{userId, setUserId, loginUser, setLoginUser}}>
+    <AppContext.Provider value={{userId, setUserId, loginUser, setLoginUser, cv, setCv}}>
       <Header/>
       <Routes>
         <Route index element={<Home/>}/>
